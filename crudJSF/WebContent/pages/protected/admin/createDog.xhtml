@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <h:outputStylesheet library="css" name="custom.css" />
+</h:head>
+<h:body>
+    <h:form>
+    	<p:messages />
+    	<h3>${msgs.dogCreateHeader}</h3>
+    	<p:panelGrid columns="2" styleClass="panelGrid" columnClasses="panelFirstLine,panelNextLine">
+    		<p:outputLabel for="dogName" value="#{msgs.dogName}"/>
+    		<p:inputText id="dogName" value="#{dogMB.dog.name}" required="true" requiredMessage="#{msgs.dogNameRequired}"/>
+    		<p:outputLabel for="dogWeight" value="#{msgs.dogWeight}"/>
+    		<p:inputText id="dogWeight" value="#{dogMB.dog.weight}" required="true" requiredMessage="#{msgs.dogWeightRequired}">
+    			<f:convertNumber />
+    		</p:inputText>
+    	</p:panelGrid>
+    	<p:panelGrid columns="2" style="width: 16px;">
+    		<p:commandButton action="#{dogMB.createDogEnd()}" value="#{msgs.create}" ajax="false"/>
+    		<p:commandButton action="#{dogMB.listAllDogs()}" value="#{msgs.cancel}" immediate="true"/>
+    	</p:panelGrid>
+    </h:form>
+</h:body>
+</html>

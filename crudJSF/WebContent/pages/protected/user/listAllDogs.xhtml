@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <h:outputStylesheet library="css" name="custom.css" />
+</h:head>
+<h:body>
+	<h:form>
+	    <h3>
+	    	#{msgs.loginHello}: #{userMB.user.name} || 
+	    	<h:commandLink value="#{msgs.logout}" action="#{userMB.logOut()}" /> 
+	    </h3>
+	    <p:dataTable value="#{dogMB.allDogs}" var="dog" styleClass="table" headerClass="tableColumnsHeader" rowClasses="tableFirstLine,tableNextLine">
+	    	<p:column>
+	    		<f:facet name="header">#{msgs.dogName}</f:facet>
+	    		#{dog.name}
+	    	</p:column>
+	    	<p:column>
+	    		<f:facet name="header">#{msgs.dogWeight}</f:facet>
+	    		#{dog.weight}
+	    	</p:column>	
+	    	<p:column>
+	    		<p:panelGrid columns="2">
+	    			<!-- Sempre salva o id em um Hidden quando estiver usando escopo de requisição -->
+	    			<h:inputHidden value="#{dog.id}" />
+	    			<p:commandButton action="#{dogMB.updateDogStart()}" value="#{msgs.update}" rendered="#{userMB.userAdmin}">
+	    				<f:setPropertyActionListener target="#{dogMB.dog}" value="#{dog}"/>
+	    			</p:commandButton>
+	    			<p:commandButton action="#{dogMB.deleteDogStart()}" value="#{msgs.delete}"  rendered="#{userMB.userAdmin}">
+	    				<f:setPropertyActionListener target="#{dogMB.dog}" value="#{dog}"/>
+	    			</p:commandButton>
+	    		</p:panelGrid>
+	    	</p:column>
+	    </p:dataTable>
+	    <p:commandButton action="createDog" value="#{msgs.create} #{msgs.dog}" />
+	</h:form>
+</h:body>
+</html>
