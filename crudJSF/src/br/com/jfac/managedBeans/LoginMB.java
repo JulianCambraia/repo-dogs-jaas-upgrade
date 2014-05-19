@@ -1,63 +1,42 @@
 package br.com.jfac.managedBeans;
 
 import java.security.Principal;
+import java.util.Date;
 
-import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import br.com.jfac.facade.UserFacade;
-import br.com.jfac.model.User;
-
 @SessionScoped
 @ManagedBean
-public class UserMB {
-	
-	private User user;
-	
-	@EJB
-	private UserFacade userFacade;
+public class LoginMB {
+
+	private String username;
+
+	private String password;
+
+	private Date currenteDate = new Date();
 
 	HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 	HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-	
-	public User getUser() {
-		if (user == null) {
-			ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-			
-			String userEmail = context.getUserPrincipal().getName();
-			user = userFacade.findUserByEmail(userEmail);
+
+	public LoginMB() {
+		if (session != null) {
+			//session.invalidate();
 		}
-		return user;
 	}
 
-	public boolean isUserAdmin() {
-		return getRequest().isUserInRole("ADMIN");
-	}
-	
-	public String logOut() {
-		getRequest().getSession().invalidate();
-		
-		return "logout";
-	}
-	
-	private HttpServletRequest getRequest() {
-		return (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-	}
-	
 	public String login() {
 		String message = "";
 		String navigator = "";
 
 		try {
 
-			request.login(user.getName(), user.getPassword());
+			request.login(username, password);
 			Principal principal = request.getUserPrincipal();
 
 			if (request.isUserInRole("Administrator")) {
@@ -86,5 +65,36 @@ public class UserMB {
 		}
 		
 		return "failure";
+	}
+
+	public String logout(){
+	   if (session != null) {
+	     session.invalidate();
+	   }                                                                                                                                                     
+	   return "logout";
+	 }
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Date getCurrenteDate() {
+		return currenteDate;
+	}
+
+	public void setCurrenteDate(Date currenteDate) {
+		this.currenteDate = currenteDate;
 	}
 }
