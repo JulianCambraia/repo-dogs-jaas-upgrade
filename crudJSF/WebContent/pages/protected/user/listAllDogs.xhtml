@@ -21,19 +21,21 @@
 				<f:facet name="header">#{msgs.dogWeight}</f:facet>
 					#{dog.weight}
 				</p:column>
-			<p:column>
+			<p:column columns="2" style="width:0.7%">
+				<f:facet name="header">#{msgs.actions}</f:facet>
 				<p:panelGrid columns="2">
 					<!-- Sempre salva o id em um Hidden quando estiver usando escopo de requisição -->
 					<h:inputHidden value="#{dog.id}" />
-					<p:commandButton action="#{dogMB.updateDogStart()}" value="#{msgs.update}" rendered="#{userMB.userAdmin}">
+					<p:commandButton action="#{dogMB.updateDogStart()}" icon="#{msgs.update}" rendered="#{userMB.userAdmin}" title="Alterar informações do cachorro" update="@all">
 						<f:setPropertyActionListener target="#{dogMB.dog}" value="#{dog}" />
 					</p:commandButton>
-					<p:commandButton action="#{dogMB.deleteDogStart()}"	value="#{msgs.delete}" rendered="#{userMB.userAdmin}">
+					<p:commandButton action="#{dogMB.deleteDogStart()}"	icon="#{msgs.delete}" rendered="#{userMB.userAdmin}" title="Remover informações do cachorro" update="@all">
 						<f:setPropertyActionListener target="#{dogMB.dog}" value="#{dog}" />
 					</p:commandButton>
 				</p:panelGrid>
 			</p:column>
 		</p:dataTable>
+		<br />
 		<p:commandButton action="createDog" value="#{msgs.create} #{msgs.dog}" />
 	</h:form>
 </h:body>
