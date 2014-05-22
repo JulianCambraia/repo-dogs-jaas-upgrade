@@ -26,10 +26,10 @@
 				<p:panelGrid columns="2">
 					<!-- Sempre salva o id em um Hidden quando estiver usando escopo de requisição -->
 					<h:inputHidden value="#{dog.id}" />
-					<p:commandButton action="#{dogMB.updateDogStart()}" icon="#{msgs.update}" rendered="#{userMB.userAdmin}" title="Alterar informações do cachorro" update="@all">
+					<p:commandButton action="#{dogMB.updateDogStart()}" icon="#{msgs.icon_update}" rendered="#{userMB.userAdmin}" title="Alterar informações do cachorro" update="@all">
 						<f:setPropertyActionListener target="#{dogMB.dog}" value="#{dog}" />
 					</p:commandButton>
-					<p:commandButton action="#{dogMB.deleteDogStart()}"	icon="#{msgs.delete}" rendered="#{userMB.userAdmin}" title="Remover informações do cachorro" update="@all">
+					<p:commandButton action="#{dogMB.deleteDogStart()}"	icon="#{msgs.icon_delete}" rendered="#{userMB.userAdmin}" title="Remover informações do cachorro" update="@all">
 						<f:setPropertyActionListener target="#{dogMB.dog}" value="#{dog}" />
 					</p:commandButton>
 				</p:panelGrid>
