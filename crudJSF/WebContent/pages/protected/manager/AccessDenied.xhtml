@@ -6,17 +6,12 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-
-<h:head>
-	<h:outputStylesheet library="css" name="custom.css" />
-</h:head>
-<h:body>
+<h:body styleClass="body">
 	<h:form>
 		<center>
 			<p:panelGrid columns="1" style="text-align:center;">
 				<h1>Acesso Negado</h1>
-				#{msgs.loginErrorMessage}
-				<p:commandLink value="Retornar" action="AccessDenied" />
+				<p:commandLink value="Retornar" action="menuGeral" />
 			</p:panelGrid>
 		</center>
 	</h:form>

@@ -6,19 +6,14 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-
 <h:head>
-	<h:outputStylesheet library="css" name="custom.css" />
+	<link type="text/css" rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/css/custom.css" />
+	<title>Menu</title>
 </h:head>
 <h:body>
-	<h:form>
-		<center>
-			<p:panelGrid columns="1" style="text-align:center;">
-				<h1>Acesso Negado</h1>
-				#{msgs.loginErrorMessage}
-				<p:commandLink value="Retornar" action="AccessDenied" />
-			</p:panelGrid>
-		</center>
+	<h:form acceptcharset="ISO-8859-1">
+		<p:megaMenu model="#{megaMenuBean.menuModel}" />
 	</h:form>
 </h:body>
 </html>
