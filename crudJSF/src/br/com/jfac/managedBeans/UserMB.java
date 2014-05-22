@@ -13,36 +13,42 @@ import br.com.jfac.model.User;
 @SessionScoped
 @ManagedBean
 public class UserMB {
-	
+
 	private User user;
-	
+
 	@EJB
 	private UserFacade userFacade;
 
 	public User getUser() {
+
 		if (user == null) {
-			
-			ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-			
+
+			ExternalContext context = FacesContext.getCurrentInstance()
+					.getExternalContext();
+
 			String userEmail = context.getUserPrincipal().getName();
 			user = userFacade.findUserByEmail(userEmail);
 		}
-		
+
 		return user;
 	}
 
 	public boolean isUserAdmin() {
 		return getRequest().isUserInRole("ADMIN");
 	}
-	
+
+	public boolean isUserManager() {
+		return getRequest().isUserInRole("MANAGER");
+	}
+
 	public String logOut() {
 		getRequest().getSession().invalidate();
-		
+
 		return "logout";
 	}
-	
+
 	private HttpServletRequest getRequest() {
 		return (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 	}
-	
+
 }
