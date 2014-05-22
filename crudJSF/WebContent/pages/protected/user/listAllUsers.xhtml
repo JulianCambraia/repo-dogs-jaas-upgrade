@@ -6,15 +6,13 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
+<h:head acceptcharset="utf-8">
 	<h:outputStylesheet library="css" name="custom.css" />
 </h:head>
 <h:body>
 	<h:form>
-		<h3>
-			#{msgs.loginHello}: #{userMB.user.name} ||	<h:commandLink value="#{msgs.logout}" action="#{userMB.logOut()}" />
-		</h3>
-		<p:dataTable value="#{dogMB.allDogs}" var="dog" styleClass="table" headerClass="tableColumnsHeader"	rowClasses="tableFirstLine,tableNextLine">
+		<h3> #{msgs.loginHello}: #{userMB.user.name} || <h:commandLink value="#{msgs.logout}" action="#{userMB.logOut()}" /> </h3>
+		<p:dataTable value="#{dogMB.allDogs}" var="dog" styleClass="table"	headerClass="tableColumnsHeader" rowClasses="tableFirstLine,tableNextLine">
 			<p:column>
 				<f:facet name="header">#{msgs.dogName}</f:facet>
 					#{dog.name}
@@ -22,20 +20,22 @@
 			<p:column>
 				<f:facet name="header">#{msgs.dogWeight}</f:facet>
 					#{dog.weight}
-			</p:column>
-			<p:column>
+				</p:column>
+			<p:column columns="2" style="width:0.7%">
+				<f:facet name="header">#{msgs.actions}</f:facet>
 				<p:panelGrid columns="2">
 					<!-- Sempre salva o id em um Hidden quando estiver usando escopo de requisição -->
 					<h:inputHidden value="#{dog.id}" />
-					<p:commandButton action="#{dogMB.updateDogStart()}" value="#{msgs.update}" rendered="#{userMB.userAdmin}">
+					<p:commandButton action="#{dogMB.updateDogStart()}" icon="#{msgs.update}" rendered="#{userMB.userAdmin}" title="Alterar informações do cachorro" update="@all">
 						<f:setPropertyActionListener target="#{dogMB.dog}" value="#{dog}" />
 					</p:commandButton>
-					<p:commandButton action="#{dogMB.deleteDogStart()}" value="#{msgs.delete}" rendered="#{userMB.userAdmin}">
+					<p:commandButton action="#{dogMB.deleteDogStart()}"	icon="#{msgs.delete}" rendered="#{userMB.userAdmin}" title="Remover informações do cachorro" update="@all">
 						<f:setPropertyActionListener target="#{dogMB.dog}" value="#{dog}" />
 					</p:commandButton>
 				</p:panelGrid>
 			</p:column>
 		</p:dataTable>
+		<br />
 		<p:commandButton action="createDog" value="#{msgs.create} #{msgs.dog}" />
 	</h:form>
 </h:body>
