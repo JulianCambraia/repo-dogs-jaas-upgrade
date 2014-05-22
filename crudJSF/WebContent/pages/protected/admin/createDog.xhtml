@@ -20,10 +20,11 @@
 			<p:inputText id="dogWeight" value="#{dogMB.dog.weight}"	required="true" requiredMessage="#{msgs.dogWeightRequired}">
 				<f:convertNumber />
 			</p:inputText>
-		</p:panelGrid>
-		<p:panelGrid columns="2" style="width: 16px;">
-			<p:commandButton action="#{dogMB.createDogEnd()}" value="#{msgs.create}" ajax="false" />
-			<p:commandButton action="#{dogMB.exibeMenu()}" value="#{msgs.cancel}" immediate="true" />
+			<p:outputLabel value=""/>
+			<p:panelGrid columns="2" style="width: 16px;">
+				<p:commandButton action="#{dogMB.createDogEnd()}" value="#{msgs.create}" ajax="false" />
+				<p:commandButton action="#{dogMB.exibeMenu()}" value="#{msgs.cancel}" immediate="true" />
+			</p:panelGrid>
 		</p:panelGrid>
 	</h:form>
 </h:body>
