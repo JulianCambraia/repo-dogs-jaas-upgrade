@@ -143,7 +143,8 @@ public class MegaMenuBean {
 
 		item = new MenuItem();
 		item.setValue("Logout");
-		item.setOutcome("logout");
+		item.setUrl("/pages/public/logout.xhtml");
+		//item.setOutcome("logout");
 
 		exitMenu.getChildren().add(item);
 
